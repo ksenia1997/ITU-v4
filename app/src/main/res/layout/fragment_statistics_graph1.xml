@@ -9,6 +9,14 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="hello_blank_kjkfragment" />
+        android:text="Categories overview"
+        android:textSize="26dp"
+        />
+
+    <com.jjoe64.graphview.GraphView
+        android:layout_width="match_parent"
+        android:layout_height="300dip"
+        android:layout_marginTop="50dip"
+        android:id="@+id/graph1"/>
 
 </FrameLayout>
