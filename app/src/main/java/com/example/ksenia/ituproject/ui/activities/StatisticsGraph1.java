@@ -69,13 +69,7 @@ public class StatisticsGraph1 extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_statistics_graph1, container, false);
-        GraphView graph = (GraphView) v.findViewById(R.id.graph1);
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
-                new DataPoint(0, 1),
-                new DataPoint(1, 5),
-                new DataPoint(2, 3)
-        });
-        graph.addSeries(series);
+
         return v;
     }
 

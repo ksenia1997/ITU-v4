@@ -1,6 +1,7 @@
 package com.example.ksenia.ituproject.ui.activities;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,8 +11,15 @@ import android.view.ViewGroup;
 
 import com.example.ksenia.ituproject.R;
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.GridLabelRenderer;
+import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
+import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -67,15 +75,44 @@ public class StatisticsGraph2 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // Nacitani XML layoutu.
         View v = inflater.inflate(R.layout.fragment_statistics_graph2, container, false);
+
+        // Formatovani grafu.
         GraphView graph = (GraphView) v.findViewById(R.id.graph2);
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
-                new DataPoint(0, 1),
-                new DataPoint(1, 5),
-                new DataPoint(2, 3)
+        graph.getGridLabelRenderer().setGridStyle(GridLabelRenderer.GridStyle.NONE);
+        graph.getGridLabelRenderer().setHorizontalLabelsVisible(false);// remove horizontal x labels and line
+        graph.getGridLabelRenderer().setVerticalLabelsVisible(false);// remove vertical labels and lines
+        graph.getViewport().setMinX(1);
+        graph.getViewport().setMaxX(2);
+        graph.getViewport().setXAxisBoundsManual(true);
+        graph.getViewport().setMinY(0);
+        graph.getViewport().setMaxY(10000);
+        graph.getViewport().setYAxisBoundsManual(true);
+        //graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity(), new  SimpleDateFormat("M")));
+
+        // Nacitani dat s prijmy.
+        BarGraphSeries<DataPoint> in = new BarGraphSeries<>(new DataPoint[] {
+                new DataPoint(2, 3020),
+
         });
-        graph.addSeries(series);
+        graph.addSeries(in);
+        in.setColor(Color.BLUE);
+        in.setSpacing(15);
+        in.setDrawValuesOnTop(true);
+        in.setValuesOnTopColor(Color.BLACK);
+
+        // Nacitani dat s vydaji.
+        BarGraphSeries<DataPoint> out = new BarGraphSeries<>(new DataPoint[] {
+                new DataPoint(1, 2240),
+        });
+        graph.addSeries(out);
+        out.setColor(Color.RED);
+        out.setSpacing(15);
+        out.setDrawValuesOnTop(true);
+        out.setValuesOnTopColor(Color.BLACK);
+
+        // Celkovy layout.
         return v;
     }
 
