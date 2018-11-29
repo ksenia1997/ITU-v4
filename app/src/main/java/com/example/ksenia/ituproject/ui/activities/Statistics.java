@@ -4,11 +4,13 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.ksenia.ituproject.R;
+import com.example.ksenia.ituproject.ui.listadapters.StatisticsAdapter;
 
 
 /**
@@ -65,8 +67,17 @@ public class Statistics extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        // To jsem doplnil.
+        View myView = inflater.inflate(R.layout.fragment_statistics, container, false);
+        ViewPager vp = (ViewPager) myView.findViewById(R.id.pager);
+        StatisticsAdapter myAdapter = new StatisticsAdapter(getActivity().getSupportFragmentManager());
+        vp.setAdapter(myAdapter);
+
+
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_statistics, container, false);
+        return myView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
