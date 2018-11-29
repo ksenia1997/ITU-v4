@@ -1,16 +1,21 @@
 package com.example.ksenia.ituproject.ui.activities;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.ksenia.ituproject.R;
 import com.example.ksenia.ituproject.model.Category;
@@ -28,6 +33,7 @@ public class CategoriesFragment extends Fragment {
     private RecyclerView listCategories;
     private FloatingActionButton fabAddCateogry;
     private CategoriesAdapter categoriesAdapter;
+    EditText create_category;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -95,12 +101,45 @@ public class CategoriesFragment extends Fragment {
     private View.OnClickListener fabAddCategoryClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Category category = new Category("New category", Color.DKGRAY);
-            categoriesAdapter.insert(category);
-            listCategories.smoothScrollToPosition(categoriesAdapter.getItemCount() - 1);
+            showDialog();
+
         }
     };
 
+    public void showDialog () {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Create new category");
+
+        create_category = new EditText(getContext());
+        builder.setView(create_category);
+        //set positive button
+        builder.setPositiveButton("Create", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String txt_category = create_category.getText().toString();
+                if (txt_category.isEmpty()) {
+                    txt_category = "New category";
+                }
+                Category category = new Category(txt_category, Color.DKGRAY);
+                categoriesAdapter.insert(category);
+                listCategories.smoothScrollToPosition(categoriesAdapter.getItemCount() - 1);
+                //Toast.makeText(getActivity().getApplicationContext(), txt_category, Toast.LENGTH_LONG ).show();
+            }
+        });
+
+        //negative button
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        //Create dialog
+        AlertDialog ad = builder.create();
+        ad.show();
+
+    }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

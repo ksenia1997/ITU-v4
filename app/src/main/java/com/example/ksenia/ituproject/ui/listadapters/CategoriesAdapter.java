@@ -73,6 +73,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter {
     public void remove(int position) {
         data.remove(position);
         notifyItemRemoved(position);
+        notifyItemRangeChanged(position, data.size()-1);
     }
 
     public class CategoryViewHolder extends RecyclerView.ViewHolder{
