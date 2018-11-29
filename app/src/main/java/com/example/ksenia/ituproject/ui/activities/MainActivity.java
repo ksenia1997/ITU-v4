@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements Listener {
                 case R.id.navigation_home:
                     break;
                 case R.id.navigation_statistics:
-                    //selectedFragment = new CategoriesFragment();
+                    selectedFragment = new Statistics();
                     break;
                 case R.id.navigation_categories:
                     selectedFragment = new CategoriesFragment();
