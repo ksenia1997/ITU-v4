@@ -62,14 +62,14 @@ public class MainActivity extends AppCompatActivity implements Listener {
             Fragment selectedFragment  = null;
             switch(item.getItemId()) {
                 case R.id.navigation_home:
-                    selectedFragment = new CategoriesFragment();
+                    selectedFragment = new WalletsFragment();
                     break;
                 case R.id.navigation_statistics:
                     //selectedFragment = new CategoriesFragment();
                     break;
                 case R.id.navigation_categories:
+                    selectedFragment = new CategoriesFragment();
                     break;
-                    //selectedFragment = new CategoriesFragment();
 
             }
             getSupportFragmentManager().beginTransaction().replace(R.id.container, selectedFragment).commit();

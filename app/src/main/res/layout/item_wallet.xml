@@ -5,10 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:padding="16dp"
     android:gravity="center"
-    android:id="@+id/item_category_root"
+    android:id="@+id/item_wallet_root"
     android:background="?attr/selectableItemBackground">
     <View
-        android:id="@+id/item_category_color"
+        android:id="@+id/item_wallet_color"
         android:layout_width="16dp"
         android:layout_height="16dp"
         android:background="@color/colorAccent"
@@ -16,10 +16,10 @@
         android:layout_marginEnd="16dp">
     </View>
     <TextView
-        android:id="@+id/item_category_title"
+        android:id="@+id/item_wallet_title"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
-        tools:text="food"/>
+        tools:text="haja"/>
 
 </LinearLayout>

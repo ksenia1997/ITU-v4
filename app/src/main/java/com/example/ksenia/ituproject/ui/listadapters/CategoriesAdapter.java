@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class CategoriesAdapter extends RecyclerView.Adapter {
 
-    private ArrayList<Category> data = new ArrayList();
+    private ArrayList<Category> data = new ArrayList<>();
 
     @NonNull
     @Override
