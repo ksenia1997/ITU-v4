@@ -1,6 +1,7 @@
 package com.example.ksenia.ituproject.ui.activities;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,13 @@ import com.example.ksenia.ituproject.R;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import lecho.lib.hellocharts.model.PieChartData;
+import lecho.lib.hellocharts.model.SliceValue;
+import lecho.lib.hellocharts.view.PieChartView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -69,7 +77,14 @@ public class StatisticsGraph1 extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_statistics_graph1, container, false);
-
+        PieChartView pieChartView = v.findViewById(R.id.chart);
+        List<SliceValue> pieData = new ArrayList<>();
+        pieData.add(new SliceValue(30, Color.BLUE).setLabel("Alcohol"));
+        pieData.add(new SliceValue(50, Color.GRAY).setLabel("Coffee"));
+        pieData.add(new SliceValue(20, Color.RED).setLabel("Food"));
+        PieChartData pieChartData = new PieChartData(pieData);
+        pieChartData.setHasLabels(true).setValueLabelTextSize(14);
+        pieChartView.setPieChartData(pieChartData);
         return v;
     }
 
