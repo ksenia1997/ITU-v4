@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6554a3</color>
+    <color name="colorPrimaryDark">#372556</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="colorWhite">#FFF</color>
+
+    <color name="colorBottomNavHighlight">#FFF</color>
+    <color name="colorBottomNavDefault">#88FFFFFF</color>
+    <color name="colorBottomNavDisabled">#44FFFFFF</color>
+    <color name="colorDefaultFood">#833c99</color>
+    <color name="colorDefaultHealth">#F3D71D</color>
+    <color name="colorDefaultSmoking">#1327A1</color>
+    <color name="colorDefaultEntertainment">#3AC9E5</color>
+
+</resources>
