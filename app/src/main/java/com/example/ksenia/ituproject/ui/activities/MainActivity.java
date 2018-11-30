@@ -17,6 +17,7 @@ import com.example.ksenia.ituproject.model.Status;
 import com.example.ksenia.ituproject.ui.fragments.CategoriesFragment;
 import com.example.ksenia.ituproject.ui.fragments.CategoriesFragment.Listener;
 import com.example.ksenia.ituproject.ui.fragments.Statistics;
+import com.example.ksenia.ituproject.ui.fragments.WalletsFragment;
 
 import java.util.ArrayList;
 
@@ -25,7 +26,7 @@ public class MainActivity extends BaseActivity implements Listener {
     private FloatingActionButton fabAddTransaction;
     boolean wasDarkMode;
 
-
+    public static Status status = new Status();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,7 @@ public class MainActivity extends BaseActivity implements Listener {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        getSupportFragmentManager().beginTransaction().replace(R.id.container, new WalletsFragment()).commit();
 
     }
 
@@ -69,6 +71,7 @@ public class MainActivity extends BaseActivity implements Listener {
             Fragment selectedFragment  = null;
             switch(item.getItemId()) {
                 case R.id.navigation_home:
+                    selectedFragment = new WalletsFragment();
                     break;
                 case R.id.navigation_statistics:
                     selectedFragment = new Statistics();
