@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.ksenia.ituproject.R;
 import com.example.ksenia.ituproject.model.Category;
+import com.example.ksenia.ituproject.ui.activities.MainActivity;
 
 import java.util.ArrayList;
 
@@ -63,17 +64,20 @@ public class CategoriesAdapter extends RecyclerView.Adapter {
         data.add(new Category("Smoking", Color.YELLOW));
         data.add(new Category("Health", Color.GREEN));
         data.add(new Category("Entertainment", Color.RED));
+        MainActivity.status.saveCategories(data);
     }
 
     public void insert(Category newCategory) {
         data.add(newCategory);
         notifyItemInserted(data.size() - 1);
+        MainActivity.status.saveCategories(data);
     }
 
     public void remove(int position) {
         data.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, data.size()-1);
+        MainActivity.status.saveCategories(data);
     }
 
     public class CategoryViewHolder extends RecyclerView.ViewHolder{

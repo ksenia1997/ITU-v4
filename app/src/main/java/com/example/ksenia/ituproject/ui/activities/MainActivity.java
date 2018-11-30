@@ -25,6 +25,7 @@ import com.example.ksenia.ituproject.ui.activities.CategoriesFragment.Listener;
 public class MainActivity extends AppCompatActivity implements Listener {
 
     private FloatingActionButton fabAddTransaction;
+    public static Status status;
 
 
     @Override
