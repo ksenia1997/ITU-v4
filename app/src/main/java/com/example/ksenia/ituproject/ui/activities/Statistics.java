@@ -71,7 +71,7 @@ public class Statistics extends Fragment {
         // To jsem doplnil.
         View myView = inflater.inflate(R.layout.fragment_statistics, container, false);
         ViewPager vp = (ViewPager) myView.findViewById(R.id.pager);
-        StatisticsAdapter myAdapter = new StatisticsAdapter(getActivity().getSupportFragmentManager());
+        StatisticsAdapter myAdapter = new StatisticsAdapter(getChildFragmentManager());
         vp.setAdapter(myAdapter);
 
 
