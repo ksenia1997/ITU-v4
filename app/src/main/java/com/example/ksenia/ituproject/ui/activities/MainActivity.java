@@ -1,23 +1,14 @@
 package com.example.ksenia.ituproject.ui.activities;
 
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.AttributeSet;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.ksenia.ituproject.R;
 import com.example.ksenia.ituproject.ui.activities.CategoriesFragment.Listener;
@@ -25,7 +16,7 @@ import com.example.ksenia.ituproject.ui.activities.CategoriesFragment.Listener;
 public class MainActivity extends AppCompatActivity implements Listener {
 
     private FloatingActionButton fabAddTransaction;
-    public static Status status;
+    public static Status status = new Status();
 
 
     @Override
@@ -37,6 +28,9 @@ public class MainActivity extends AppCompatActivity implements Listener {
         // set up click listeners
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.container, new WalletsFragment()).commit();
+
 
 
     }

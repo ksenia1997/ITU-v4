@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.ksenia.ituproject.R;
+import com.example.ksenia.ituproject.model.Wallet;
+import com.example.ksenia.ituproject.ui.activities.MainActivity;
 
 public class WalletsAdapter extends RecyclerView.Adapter {
     @NonNull
@@ -24,12 +26,14 @@ public class WalletsAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-
+        WalletsViewHolder walletsViewHolder = (WalletsViewHolder) viewHolder;
+        Wallet wallet = MainActivity.status.getWallets().get(i);
+        walletsViewHolder.txtTitle.setText(wallet.getName() + " (" + wallet.getBalance() + ")");
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return MainActivity.status.getWallets().size();
     }
 
     public class WalletsViewHolder extends RecyclerView.ViewHolder {
@@ -40,7 +44,6 @@ public class WalletsAdapter extends RecyclerView.Adapter {
         WalletsViewHolder(@NonNull View itemView) {
             super(itemView);
             root = itemView.findViewById(R.id.item_wallet_root);
-            icon = itemView.findViewById(R.id.item_wallet_color);
             txtTitle = itemView.findViewById(R.id.item_wallet_title);
         }
     }

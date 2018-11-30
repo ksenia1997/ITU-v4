@@ -1,29 +1,23 @@
-package com.example.ksenia.ituproject.ui.activities;
+package com.example.ksenia.ituproject;
 
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.example.ksenia.ituproject.R;
-import com.example.ksenia.ituproject.ui.listadapters.WalletsAdapter;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link WalletsFragment.OnFragmentInteractionListener} interface
+ * {@link OperationsFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link WalletsFragment#newInstance} factory method to
+ * Use the {@link OperationsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class WalletsFragment extends Fragment {
+public class OperationsFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -35,7 +29,7 @@ public class WalletsFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public WalletsFragment() {
+    public OperationsFragment() {
         // Required empty public constructor
     }
 
@@ -45,11 +39,11 @@ public class WalletsFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment WalletsFragment.
+     * @return A new instance of fragment OperationsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static WalletsFragment newInstance(String param1, String param2) {
-        WalletsFragment fragment = new WalletsFragment();
+    public static OperationsFragment newInstance(String param1, String param2) {
+        OperationsFragment fragment = new OperationsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -67,24 +61,17 @@ public class WalletsFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
-        View view = inflater.inflate(R.layout.fragment_wallets, container, false);
-        RecyclerView listWalletsView = view.findViewById(R.id.list_wallets);
-        WalletsAdapter walletsAdapter = new WalletsAdapter();
-        listWalletsView.setAdapter(walletsAdapter);
-        listWalletsView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        return view;
+        return inflater.inflate(R.layout.fragment_operations, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
-//        if (mListener != null) {
-//            mListener.onFragmentInteraction(uri);
-//        }
+        if (mListener != null) {
+            mListener.onFragmentInteraction(uri);
+        }
     }
 
     @Override
@@ -93,8 +80,8 @@ public class WalletsFragment extends Fragment {
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
         }
     }
 
@@ -116,6 +103,6 @@ public class WalletsFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction();
+        void onFragmentInteraction(Uri uri);
     }
 }

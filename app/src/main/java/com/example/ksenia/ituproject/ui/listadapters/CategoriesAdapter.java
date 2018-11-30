@@ -63,7 +63,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter {
         data.add(new Category("Food", Color.CYAN));
         data.add(new Category("Smoking", Color.YELLOW));
         data.add(new Category("Health", Color.GREEN));
-        data.add(new Category("Entertainment", Color.RED));
+        data.add(new Category("test", Color.RED));
         MainActivity.status.saveCategories(data);
     }
 
