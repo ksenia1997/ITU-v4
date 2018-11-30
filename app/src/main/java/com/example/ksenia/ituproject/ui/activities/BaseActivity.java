@@ -7,7 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 
-public class BaseActivity extends AppCompatActivity {
+public class   BaseActivity extends AppCompatActivity {
 
     protected static final String SETTINGS_DEFAULT = "DEFAULT";
 
