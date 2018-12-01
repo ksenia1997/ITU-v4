@@ -40,6 +40,7 @@ public class OperationsAdapter extends RecyclerView.Adapter {
         OperationViewHolder operationViewHolder = (OperationViewHolder) viewHolder;
         final Operation operation = wallet.getNthOperationFromEnd(i);  // descending
         operationViewHolder.amountTextView.setText(Float.toString(operation.getAmount()));
+        operationViewHolder.currencyTextView.setText(operation.getCurrency().toString());
         operationViewHolder.descriptionTextView.setText(operation.getDescription() != null ? operation.getDescription() : "");
         operationViewHolder.categoryTextView.setText(
                 operation.getCategory() != null ? operation.getCategory().getTitle() : ""
@@ -98,6 +99,7 @@ public class OperationsAdapter extends RecyclerView.Adapter {
     public class OperationViewHolder extends RecyclerView.ViewHolder {
         View root;
         TextView amountTextView;
+        TextView currencyTextView;
         TextView categoryTextView;
         TextView descriptionTextView;
 
@@ -105,6 +107,7 @@ public class OperationsAdapter extends RecyclerView.Adapter {
             super(itemView);
             root = itemView.findViewById(R.id.operationItemRoot);
             amountTextView = itemView.findViewById(R.id.operationAmountTextView);
+            currencyTextView = itemView.findViewById(R.id.operationCurrencyTextView);
             categoryTextView = itemView.findViewById(R.id.operationCategoryTextView);
             descriptionTextView = itemView.findViewById(R.id.operationDescriptionTextView);
         }
