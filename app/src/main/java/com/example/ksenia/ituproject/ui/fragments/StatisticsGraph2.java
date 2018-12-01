@@ -25,8 +25,8 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.util.List;
 
-import static java.lang.Float.max;
-import static java.lang.Math.abs;
+//import static java.lang.Float.max;
+//import static java.lang.Math.abs;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -79,7 +79,15 @@ public class StatisticsGraph2 extends Fragment {
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
+    public static float max(float a, float b) {
+        return a > b ? a : b;
+    }
+
+    public static float abs(float a) {
+        return a < 0 ? -a : a;
+    }
+
+//    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
