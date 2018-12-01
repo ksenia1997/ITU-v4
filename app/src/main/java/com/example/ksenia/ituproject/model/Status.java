@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Status {
 
-    private Currency mainCurrency;
+    private static Currency mainCurrency;
 
     private final static List<Currency> currencies = new ArrayList<>();
 
@@ -86,8 +86,8 @@ public class Status {
         return mainCurrency;
     }
 
-    public void setMainCurrency(Currency mainCurrency) {
-        this.mainCurrency = mainCurrency;
+    public static void setMainCurrency(Currency currency) {
+        mainCurrency = currency;
     }
 
     /**
