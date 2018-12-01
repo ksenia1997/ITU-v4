@@ -40,4 +40,8 @@ public class Category {
     public String toString() {
         return title;
     }
+
+    void removeOperation(Operation operation) {
+        operations.remove(operation);
+    }
 }

@@ -59,4 +59,13 @@ public class Wallet {
         return operations.get(operations.size() - 1 - n);
     }
 
+    void removeOperation(Operation operation) {
+        operations.remove(operation);
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
 }

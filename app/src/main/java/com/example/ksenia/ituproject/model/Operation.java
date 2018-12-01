@@ -49,9 +49,18 @@ public class Operation {
     public boolean isOutcome() { return amount < 0; }
 
 
-    // removes this operation
+    /**
+     * Remove this operation from its wallet and category.
+     */
     public void remove() {
-        wallet.getOperations().remove(this);
+        wallet.removeOperation(this);
+        wallet = null;
+
+        if (category != null) {
+            category.removeOperation(this);
+            category = null;
+        }
+
     }
 
 }

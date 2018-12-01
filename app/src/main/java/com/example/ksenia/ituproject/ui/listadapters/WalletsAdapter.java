@@ -1,5 +1,7 @@
 package com.example.ksenia.ituproject.ui.listadapters;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
@@ -30,16 +32,45 @@ public class WalletsAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int i) {
-        final WalletsViewHolder walletsViewHolder = (WalletsViewHolder) viewHolder;
+        final WalletsViewHolder walletViewHolder = (WalletsViewHolder) viewHolder;
         final Wallet wallet = MyApp.status.getWallets().get(i);
-        walletsViewHolder.txtTitle.setText(wallet.getName() + " (" + wallet.getBalance() + ")");
-        walletsViewHolder.root.setOnClickListener(new View.OnClickListener() {
+        walletViewHolder.txtTitle.setText(wallet.getName() + " (" + wallet.getBalance() + ")");
+        walletViewHolder.root.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("a", wallet.getName());
                 ((FragmentActivity) v.getContext()).getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, OperationsFragment.newInstance(walletsViewHolder.getAdapterPosition()))
+                        .replace(R.id.container, OperationsFragment.newInstance(walletViewHolder.getAdapterPosition()))
                         .commit();
+            }
+        });
+        walletViewHolder.root.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                builder.setTitle("Remove " + wallet.toString());
+                TextView textView = new TextView(v.getContext());
+                textView.setText("Are you sure you want to remove wallet \""+ wallet.toString() +"\""
+                        + " and its operations ("+wallet.getOperations().size()+")?");
+                textView.setPadding(30, 10, 30, 10);
+                builder.setView(textView);
+                builder.setPositiveButton("Remove", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        MyApp.status.removeWallet(wallet);
+                        notifyDataSetChanged();
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                builder.create().show();
+
+                return true;
             }
         });
     }

@@ -89,4 +89,16 @@ public class Status {
     public void setMainCurrency(Currency mainCurrency) {
         this.mainCurrency = mainCurrency;
     }
+
+    /**
+     * Remove wallet and remove its operations (removing operation removes it from category).
+     * @param wallet Wallet to remove.
+     */
+    public void removeWallet(Wallet wallet) {
+        List<Operation> operationList = new ArrayList<>(wallet.getOperations());
+        for (Operation op : operationList) {
+            op.remove();
+        }
+        wallets.remove(wallet);
+    }
 }
