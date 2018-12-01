@@ -44,14 +44,23 @@ public class Operation {
     public Wallet getWallet() {return wallet; }
     public Currency getCurrency() { return currency; }
     public Category getCategory() { return category; }
-    public String getDescription() { return description; }
+    public String getDescription() { return description != null ? description : ""; }
     public boolean isIncome() { return amount > 0; }
     public boolean isOutcome() { return amount < 0; }
 
 
-    // removes this operation
+    /**
+     * Remove this operation from its wallet and category.
+     */
     public void remove() {
-        wallet.getOperations().remove(this);
+        wallet.removeOperation(this);
+        wallet = null;
+
+        if (category != null) {
+            category.removeOperation(this);
+            category = null;
+        }
+
     }
 
 }
