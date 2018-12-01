@@ -35,4 +35,9 @@ public class Category {
     public void addOperation(Operation o) {
         operations.add(o);
     }
+
+    @Override
+    public String toString() {
+        return title;
+    }
 }

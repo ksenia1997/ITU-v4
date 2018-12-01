@@ -10,6 +10,8 @@ import java.util.List;
 
 public class Status {
 
+    private final List<Currency> currencies = new ArrayList<>();
+
     private final static List<Wallet> wallets = new ArrayList<>();
 
     // Promenna pro ukladani dat kategorii.
@@ -28,6 +30,10 @@ public class Status {
     }
 
     public Status(Context context) {
+
+        // init Currencies
+        currencies.add(new Currency("EUR"));
+        currencies.add(new Currency("CZK"));
 
         // init Categories
         CategoriesData.add(new Category("Food", ContextCompat.getColor(context, R.color.colorDefaultFood)));
@@ -67,4 +73,8 @@ public class Status {
     }
 
     public static List<Wallet> getWallets() { return wallets; }
+
+    public List<Currency> getCurrencies() {
+        return currencies;
+    }
 }

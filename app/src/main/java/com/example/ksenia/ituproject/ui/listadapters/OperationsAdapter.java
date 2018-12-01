@@ -35,7 +35,7 @@ public class OperationsAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         OperationViewHolder operationViewHolder = (OperationViewHolder) viewHolder;
-        final Operation operation = wallet.getOperations().get(i);
+        final Operation operation = wallet.getNthOperationFromEnd(i);  // descending
         operationViewHolder.amountTextView.setText(Float.toString(operation.getAmount()));
         operationViewHolder.descriptionTextView.setText(operation.getDescription() != null ? operation.getDescription() : "");
         operationViewHolder.categoryTextView.setText(

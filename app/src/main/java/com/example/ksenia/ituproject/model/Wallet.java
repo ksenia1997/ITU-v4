@@ -31,9 +31,7 @@ public class Wallet {
     }
 
     public Operation addIncomeOperation(float amount, Currency currency, String description) {
-        Operation o = Operation.incomeOperation(amount, this, currency, description);
-        operations.add(o);
-        return o;
+        return Operation.incomeOperation(amount, this, currency, description);
     }
 
     public Operation addIncomeOperation(float amount, String description) {
@@ -46,9 +44,7 @@ public class Wallet {
 
 
     public Operation addOutcomeOperation(float amount, Currency currency, Category category, String description) {
-        Operation o = Operation.outcomeOperation(amount, this, currency, category, description);
-        operations.add(o);
-        return o;
+        return Operation.outcomeOperation(amount, this, currency, category, description);
     }
 
     public Operation addOutcomeOperation(float amount, Category category, String description) {
@@ -57,6 +53,10 @@ public class Wallet {
 
     public Operation addOutcomeOperation(float amount, Category category) {
         return addOutcomeOperation(amount, category, null);
+    }
+
+    public Operation getNthOperationFromEnd(int n) {
+        return operations.get(operations.size() - 1 - n);
     }
 
 }
