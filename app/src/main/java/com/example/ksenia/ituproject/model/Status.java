@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Status {
 
-    private final List<Wallet> wallets = new ArrayList<>();
+    private final static List<Wallet> wallets = new ArrayList<>();
 
     // Promenna pro ukladani dat kategorii.
     private static ArrayList<Category> CategoriesData = new ArrayList<>();
@@ -63,7 +63,8 @@ public class Status {
         homeWallet.addOutcomeOperation(150, null);
         homeWallet.addOutcomeOperation(150, null);
 
+
     }
 
-    public List<Wallet> getWallets() { return wallets; }
+    public static List<Wallet> getWallets() { return wallets; }
 }

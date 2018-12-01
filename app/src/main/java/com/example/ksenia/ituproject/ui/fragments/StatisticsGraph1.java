@@ -11,13 +11,17 @@ import android.view.ViewGroup;
 import com.example.ksenia.ituproject.MyApp;
 import com.example.ksenia.ituproject.R;
 import com.example.ksenia.ituproject.model.Category;
+import com.example.ksenia.ituproject.model.Operation;
+import com.example.ksenia.ituproject.model.Wallet;
 import com.example.ksenia.ituproject.ui.activities.MainActivity;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import lecho.lib.hellocharts.model.PieChartData;
 import lecho.lib.hellocharts.model.SliceValue;
@@ -83,15 +87,54 @@ public class StatisticsGraph1 extends Fragment {
         View v = inflater.inflate(R.layout.fragment_statistics_graph1, container, false);
         PieChartView pieChartView = v.findViewById(R.id.chart);
         List<SliceValue> pieData = new ArrayList<>();
-        // Nacitani spolecnych dat.
-        for(Category c : MyApp.status.loadCategories())
+
+        // Promenna pro ukladani statistik podle kategorii.
+        Map<Category,Float> stats = new HashMap<Category, Float>();
+
+        // Inicializace utraty kategorii na 0.
+        ArrayList<Category> all_categories = MyApp.status.loadCategories();
+        for(Category c : all_categories)
         {
-            pieData.add(new SliceValue(30,c.getColour()).setLabel(c.getTitle()));
+            stats.put(c,0.0f);
         }
 
+        // Nacitani wallets.
+        float sum = 0;
+        List<Wallet> wallets = Status.getWallets();
+        for(Wallet w : wallets)
+        {
+            // Nacitani operaci z wallet.
+            List<Operation> lst = w.getOperations();
+            for(Operation o : lst)
+            {
+                // Kategorie vydaje.
+                Category category = o.getCategory();
+                if(category == null) {
+                    continue;
+                }
+                // Hodnota vydaje.
+                float amount = o.getAmount();
+
+                // Ukladani do statistik.
+                float was = stats.get(category);
+                stats.put(category,amount+was);
+
+                // Ukladani celkove sumy.
+                sum = sum + amount;
+            }
+        }
+
+        // Vizualizace dat v grafu.
+        for(Category c : all_categories)
+        {
+            pieData.add(new SliceValue(stats.get(c)/sum,c.getColour()).setLabel(c.getTitle()));
+        }
+
+        // Design grafu.
         PieChartData pieChartData = new PieChartData(pieData);
         pieChartData.setHasLabels(true).setValueLabelTextSize(14);
         pieChartView.setPieChartData(pieChartData);
+
         return v;
     }
 
