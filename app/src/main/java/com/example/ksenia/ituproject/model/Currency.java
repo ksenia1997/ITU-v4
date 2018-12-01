@@ -4,14 +4,20 @@ public class Currency {
 
     private String name;
 
-    private float rate;  // kurz
+    private float rate;  // kurz, for main currency == 1
 
     // true -> 1 unit of main currency == `rate` units of this currency
     // false -> `rate` units of main currency == 1 unit of this currency
     private boolean direction;
 
-    public Currency(String name) {
+    public Currency(String name, float rate, boolean direction) {
         this.name = name;
+        this.rate = rate;
+        this.direction = direction;
+    }
+
+    public Currency(String name, double rate, boolean direction) {
+        this(name, (float) rate, direction);
     }
 
     public String getName() { return name; }

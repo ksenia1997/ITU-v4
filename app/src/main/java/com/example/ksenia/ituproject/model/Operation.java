@@ -63,6 +63,14 @@ public class Operation {
 
     }
 
+    public float getAmountInMainCurrency() {
+        if (currency.getDirection()) {
+            return getAmount() / currency.getRate();
+        } else {
+            return getAmount() * currency.getRate();
+        }
+    }
+
 }
 
 
