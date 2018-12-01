@@ -127,7 +127,7 @@ public class StatisticsGraph2 extends Fragment {
 
         });
         graph.addSeries(in);
-        in.setColor(Color.BLUE);
+        in.setColor(Color.RED);
         in.setSpacing(15);
         in.setDrawValuesOnTop(true);
         in.setValuesOnTopColor(Color.BLACK);
@@ -137,7 +137,7 @@ public class StatisticsGraph2 extends Fragment {
                 new DataPoint(1, abs(outcomes)),
         });
         graph.addSeries(out);
-        out.setColor(Color.RED);
+        out.setColor(Color.BLUE);
         out.setSpacing(15);
         out.setDrawValuesOnTop(true);
         out.setValuesOnTopColor(Color.BLACK);
