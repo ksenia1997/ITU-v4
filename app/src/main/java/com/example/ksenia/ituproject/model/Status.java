@@ -52,26 +52,26 @@ public class Status {
         wallets.add(new Wallet("Savings"));
 
         // add Operations
-        homeWallet.addIncomeOperation(40);
-        homeWallet.addIncomeOperation(40);
-        homeWallet.addIncomeOperation(40);
-        homeWallet.addIncomeOperation(50);
-        homeWallet.addOutcomeOperation(150, CategoriesData.get(0));
-        homeWallet.addOutcomeOperation(150, CategoriesData.get(0));
-        homeWallet.addOutcomeOperation(150, CategoriesData.get(0));
-        homeWallet.addOutcomeOperation(150, CategoriesData.get(1));
-        homeWallet.addOutcomeOperation(150, CategoriesData.get(2));
-        homeWallet.addOutcomeOperation(150, CategoriesData.get(3));
-        homeWallet.addOutcomeOperation(150, CategoriesData.get(2));
-        homeWallet.addIncomeOperation(50);
-        homeWallet.addOutcomeOperation(150, null);
-        homeWallet.addOutcomeOperation(150, null);
-        homeWallet.addIncomeOperation(50);
-        homeWallet.addOutcomeOperation(150, null);
-        homeWallet.addOutcomeOperation(150, null);
-        homeWallet.addIncomeOperation(50);
-        homeWallet.addOutcomeOperation(150, null);
-        homeWallet.addOutcomeOperation(150, null);
+        homeWallet.addIncomeOperation(40, currencies.get(0));
+        homeWallet.addIncomeOperation(40, currencies.get(0));
+        homeWallet.addIncomeOperation(40, currencies.get(0));
+        homeWallet.addIncomeOperation(50, currencies.get(0));
+        homeWallet.addOutcomeOperation(150, currencies.get(0), CategoriesData.get(0));
+        homeWallet.addOutcomeOperation(150, currencies.get(0), CategoriesData.get(0));
+        homeWallet.addOutcomeOperation(150, currencies.get(0), CategoriesData.get(0));
+        homeWallet.addOutcomeOperation(150, currencies.get(0), CategoriesData.get(1));
+        homeWallet.addOutcomeOperation(150, currencies.get(1), CategoriesData.get(2));
+        homeWallet.addOutcomeOperation(150, currencies.get(1), CategoriesData.get(3));
+        homeWallet.addOutcomeOperation(150, currencies.get(0), CategoriesData.get(2));
+        homeWallet.addIncomeOperation(50, currencies.get(0));
+        homeWallet.addOutcomeOperation(150, currencies.get(0), null);
+        homeWallet.addOutcomeOperation(150, currencies.get(0), null);
+        homeWallet.addIncomeOperation(50, currencies.get(0));
+        homeWallet.addOutcomeOperation(150, currencies.get(0), null);
+        homeWallet.addOutcomeOperation(150, currencies.get(0), null);
+        homeWallet.addIncomeOperation(50, currencies.get(0));
+        homeWallet.addOutcomeOperation(150, currencies.get(0), null);
+        homeWallet.addOutcomeOperation(150, currencies.get(0), null);
 
 
     }

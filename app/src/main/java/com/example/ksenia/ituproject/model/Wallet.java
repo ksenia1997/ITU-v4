@@ -34,12 +34,8 @@ public class Wallet {
         return Operation.incomeOperation(amount, this, currency, description);
     }
 
-    public Operation addIncomeOperation(float amount, String description) {
-        return addIncomeOperation(amount, null, description);
-    }
-
-    public Operation addIncomeOperation(float amount) {
-        return addIncomeOperation(amount, null);
+    public Operation addIncomeOperation(float amount, Currency currency) {
+        return addIncomeOperation(amount, currency, null);
     }
 
 
@@ -47,12 +43,8 @@ public class Wallet {
         return Operation.outcomeOperation(amount, this, currency, category, description);
     }
 
-    public Operation addOutcomeOperation(float amount, Category category, String description) {
-        return addOutcomeOperation(amount, null, category, description);
-    }
-
-    public Operation addOutcomeOperation(float amount, Category category) {
-        return addOutcomeOperation(amount, category, null);
+    public Operation addOutcomeOperation(float amount, Currency currency, Category category) {
+        return addOutcomeOperation(amount, currency, category, null);
     }
 
     public Operation getNthOperationFromEnd(int n) {

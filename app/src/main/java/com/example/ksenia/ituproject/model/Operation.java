@@ -44,7 +44,7 @@ public class Operation {
     public Wallet getWallet() {return wallet; }
     public Currency getCurrency() { return currency; }
     public Category getCategory() { return category; }
-    public String getDescription() { return description; }
+    public String getDescription() { return description != null ? description : ""; }
     public boolean isIncome() { return amount > 0; }
     public boolean isOutcome() { return amount < 0; }
 
