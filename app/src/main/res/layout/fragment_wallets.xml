@@ -3,11 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.WalletsFragment">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/list_wallets"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/AddWalletFloatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        app:srcCompat="@drawable/ic_notifications_black_24dp"
+        android:tint="@android:color/white"
+        android:layout_margin="16dp"/>
 
 </FrameLayout>

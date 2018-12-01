@@ -2,42 +2,32 @@ package com.example.ksenia.ituproject.ui.fragments;
 
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
+import com.example.ksenia.ituproject.MyApp;
 import com.example.ksenia.ituproject.R;
+import com.example.ksenia.ituproject.model.Wallet;
 import com.example.ksenia.ituproject.ui.listadapters.WalletsAdapter;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link WalletsFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link WalletsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class WalletsFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
+    private WalletsAdapter walletsAdapter;
 
-    public WalletsFragment() {
-        // Required empty public constructor
-    }
+    public WalletsFragment() {}
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment WalletsFragment.
-     */
     public static WalletsFragment newInstance(String param1, String param2) {
         WalletsFragment fragment = new WalletsFragment();
         Bundle args = new Bundle();
@@ -45,23 +35,27 @@ public class WalletsFragment extends Fragment {
         return fragment;
     }
 
-    @Override
+    /*@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
         }
-    }
+    }*/
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_wallets, container, false);
         RecyclerView listWalletsView = view.findViewById(R.id.list_wallets);
-        WalletsAdapter walletsAdapter = new WalletsAdapter();
+        walletsAdapter = new WalletsAdapter();
         listWalletsView.setAdapter(walletsAdapter);
         listWalletsView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        // add listener to `add button`
+        view.findViewById(R.id.AddWalletFloatingActionButton).setOnClickListener(
+                this.AddWalletFloatingActionButtonOnClickListener
+        );
 
         return view;
     }
@@ -104,4 +98,42 @@ public class WalletsFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction();
     }
+
+    // show dialog
+    private View.OnClickListener AddWalletFloatingActionButtonOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+            builder.setTitle("Create New Wallet");
+
+            final EditText newWalletEditText = new EditText(getContext());
+            builder.setView(newWalletEditText);
+
+            builder.setPositiveButton("Create", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    String value = newWalletEditText.getText().toString();
+                    if (value.isEmpty()) {
+                        value = "New Wallet";
+                    }
+
+                    // add new wallet to Status and notify adapter
+                    MyApp.status.getWallets().add(new Wallet(value));
+                    walletsAdapter.notifyDataSetChanged();
+
+                }
+            });
+
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+
+            builder.create().show();
+        }
+    };
+
 }
