@@ -12,9 +12,9 @@ import java.util.Map;
 
 public class Status {
 
-    private Currency mainCurrency;
+    private static Currency mainCurrency;
 
-    private final List<Currency> currencies = new ArrayList<>();
+    private final static List<Currency> currencies = new ArrayList<>();
 
     private final static List<Wallet> wallets = new ArrayList<>();
 
@@ -80,7 +80,7 @@ public class Status {
 
     public static List<Wallet> getWallets() { return wallets; }
 
-    public List<Currency> getCurrencies() {
+    public static List<Currency> getCurrencies() {
         return currencies;
     }
 
@@ -88,8 +88,8 @@ public class Status {
         return mainCurrency;
     }
 
-    public void setMainCurrency(Currency mainCurrency) {
-        this.mainCurrency = mainCurrency;
+    public static void setMainCurrency(Currency currency) {
+        mainCurrency = currency;
     }
 
     /**
