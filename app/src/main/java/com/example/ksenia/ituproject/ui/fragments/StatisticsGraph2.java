@@ -3,19 +3,30 @@ package com.example.ksenia.ituproject.ui.fragments;
 import android.content.Context;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.ksenia.ituproject.R;
+import com.example.ksenia.ituproject.model.Category;
+import com.example.ksenia.ituproject.model.Operation;
+import com.example.ksenia.ituproject.model.Status;
+import com.example.ksenia.ituproject.model.Wallet;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
 import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
+
+import java.util.List;
+
+import static java.lang.Float.max;
+import static java.lang.Math.abs;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -68,11 +79,35 @@ public class StatisticsGraph2 extends Fragment {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Nacitani XML layoutu.
         View v = inflater.inflate(R.layout.fragment_statistics_graph2, container, false);
+
+        // Nacitani statistickych udaju.
+        float incomes = 0;
+        float outcomes = 0;
+
+        // Prochazeni veskerych wallets.
+        for(Wallet w : Status.getWallets())
+        {
+            // Nacitani operaci z wallet.
+            for(Operation o : w.getOperations())
+            {
+                // Hodnota vydaje.
+                float amount = o.getAmount();
+
+                if (amount > 0)
+                {
+                    incomes = incomes + amount;
+                }
+                else {
+                    outcomes = outcomes + amount;
+                }
+            }
+        }
 
         // Formatovani grafu.
         GraphView graph = (GraphView) v.findViewById(R.id.graph2);
@@ -83,13 +118,12 @@ public class StatisticsGraph2 extends Fragment {
         graph.getViewport().setMaxX(2);
         graph.getViewport().setXAxisBoundsManual(true);
         graph.getViewport().setMinY(0);
-        graph.getViewport().setMaxY(10000);
+        graph.getViewport().setMaxY(max(abs(incomes),abs(outcomes)));
         graph.getViewport().setYAxisBoundsManual(true);
-        //graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity(), new  SimpleDateFormat("M")));
 
-        // Nacitani dat s prijmy.
+        // Vizualizace sloupce s prijmy.
         BarGraphSeries<DataPoint> in = new BarGraphSeries<>(new DataPoint[] {
-                new DataPoint(2, 3020),
+                new DataPoint(2, abs(incomes)),
 
         });
         graph.addSeries(in);
@@ -98,9 +132,9 @@ public class StatisticsGraph2 extends Fragment {
         in.setDrawValuesOnTop(true);
         in.setValuesOnTopColor(Color.BLACK);
 
-        // Nacitani dat s vydaji.
+        // Vizualizace sloupce s vydaji.
         BarGraphSeries<DataPoint> out = new BarGraphSeries<>(new DataPoint[] {
-                new DataPoint(1, 2240),
+                new DataPoint(1, abs(outcomes)),
         });
         graph.addSeries(out);
         out.setColor(Color.RED);
