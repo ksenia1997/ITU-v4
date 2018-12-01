@@ -10,6 +10,8 @@ import java.util.List;
 
 public class Status {
 
+    private Currency mainCurrency;
+
     private final List<Currency> currencies = new ArrayList<>();
 
     private final static List<Wallet> wallets = new ArrayList<>();
@@ -32,8 +34,10 @@ public class Status {
     public Status(Context context) {
 
         // init Currencies
+        Currency czkCurrency = new Currency("CZK");
+        mainCurrency = czkCurrency;
+        currencies.add(czkCurrency);
         currencies.add(new Currency("EUR"));
-        currencies.add(new Currency("CZK"));
 
         // init Categories
         CategoriesData.add(new Category("Food", ContextCompat.getColor(context, R.color.colorDefaultFood)));
@@ -76,5 +80,13 @@ public class Status {
 
     public List<Currency> getCurrencies() {
         return currencies;
+    }
+
+    public Currency getMainCurrency() {
+        return mainCurrency;
+    }
+
+    public void setMainCurrency(Currency mainCurrency) {
+        this.mainCurrency = mainCurrency;
     }
 }
