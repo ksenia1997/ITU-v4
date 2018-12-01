@@ -5,6 +5,7 @@
     android:id="@+id/operationItemRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
     android:maxHeight="60sp"
     tools:layout_editor_absoluteY="81dp">
 
@@ -32,6 +33,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:text="TextView"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/operationAmountTextView"
         app:layout_constraintTop_toTopOf="parent" />

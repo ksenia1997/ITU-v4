@@ -34,7 +34,8 @@ public class WalletsAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int i) {
         final WalletsViewHolder walletViewHolder = (WalletsViewHolder) viewHolder;
         final Wallet wallet = MyApp.status.getWallets().get(i);
-        walletViewHolder.txtTitle.setText(wallet.getName() + " (" + wallet.getBalance() + ")");
+        walletViewHolder.txtTitle.setText(wallet.getName());
+        walletViewHolder.summaryTextView.setText(MyApp.status.getWalletSummary(wallet));
         walletViewHolder.root.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,11 +85,13 @@ public class WalletsAdapter extends RecyclerView.Adapter {
         View root;
         public View icon;
         TextView txtTitle;
+        TextView summaryTextView;
 
         WalletsViewHolder(@NonNull View itemView) {
             super(itemView);
             root = itemView.findViewById(R.id.item_wallet_root);
             txtTitle = itemView.findViewById(R.id.item_wallet_title);
+            summaryTextView = itemView.findViewById(R.id.item_wallet_summary);
         }
     }
 

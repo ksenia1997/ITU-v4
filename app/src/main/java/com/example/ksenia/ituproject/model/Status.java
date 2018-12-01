@@ -101,4 +101,8 @@ public class Status {
         }
         wallets.remove(wallet);
     }
+
+    public String getWalletSummary(Wallet wallet) {
+        return wallet.getCurrencySummary(this.currencies);
+    }
 }
