@@ -1,10 +1,15 @@
 package com.example.ksenia.ituproject.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Category {
 
     private String title;
 
     private int colour;
+
+    private List<Operation> operations = new ArrayList<>();
 
     public Category(String title, int colour) {
         this.title = title;
@@ -25,5 +30,9 @@ public class Category {
 
     public void setColour(int colour) {
         this.colour = colour;
+    }
+
+    public void addOperation(Operation o) {
+        operations.add(o);
     }
 }

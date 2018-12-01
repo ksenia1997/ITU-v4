@@ -1,15 +1,19 @@
 package com.example.ksenia.ituproject.ui.listadapters;
 
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.ksenia.ituproject.MyApp;
 import com.example.ksenia.ituproject.R;
 import com.example.ksenia.ituproject.model.Wallet;
 import com.example.ksenia.ituproject.ui.activities.MainActivity;
+import com.example.ksenia.ituproject.ui.fragments.OperationsFragment;
 
 public class WalletsAdapter extends RecyclerView.Adapter {
     @NonNull
@@ -25,15 +29,24 @@ public class WalletsAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-        WalletsViewHolder walletsViewHolder = (WalletsViewHolder) viewHolder;
-        Wallet wallet = MainActivity.status.getWallets().get(i);
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int i) {
+        final WalletsViewHolder walletsViewHolder = (WalletsViewHolder) viewHolder;
+        final Wallet wallet = MyApp.status.getWallets().get(i);
         walletsViewHolder.txtTitle.setText(wallet.getName() + " (" + wallet.getBalance() + ")");
+        walletsViewHolder.root.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("a", wallet.getName());
+                ((FragmentActivity) v.getContext()).getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, OperationsFragment.newInstance(walletsViewHolder.getAdapterPosition()))
+                        .commit();
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return MainActivity.status.getWallets().size();
+        return MyApp.status.getWallets().size();
     }
 
     public class WalletsViewHolder extends RecyclerView.ViewHolder {

@@ -4,11 +4,17 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.ksenia.ituproject.MyApp;
 import com.example.ksenia.ituproject.R;
+import com.example.ksenia.ituproject.model.Wallet;
+import com.example.ksenia.ituproject.ui.activities.MainActivity;
+import com.example.ksenia.ituproject.ui.listadapters.OperationsAdapter;
 
 
 /**
@@ -22,12 +28,8 @@ import com.example.ksenia.ituproject.R;
 public class OperationsFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private static final String ARG_WALLET_IDX = "wallet";
+    private Wallet wallet;
 
     private OnFragmentInteractionListener mListener;
 
@@ -39,16 +41,14 @@ public class OperationsFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
+     * @param walletIdx index in Status.wallets list
      * @return A new instance of fragment OperationsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static OperationsFragment newInstance(String param1, String param2) {
+    public static OperationsFragment newInstance(int walletIdx) {
         OperationsFragment fragment = new OperationsFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putInt(ARG_WALLET_IDX, walletIdx);
         fragment.setArguments(args);
         return fragment;
     }
@@ -57,8 +57,7 @@ public class OperationsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            wallet = MyApp.status.getWallets().get(getArguments().getInt(ARG_WALLET_IDX));
         }
     }
 
@@ -66,7 +65,12 @@ public class OperationsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_operations, container, false);
+        View view = inflater.inflate(R.layout.fragment_operations, container, false);
+        RecyclerView listOperationsView = view.findViewById(R.id.operationsRecyclerView);
+        OperationsAdapter adapter = new OperationsAdapter(wallet);
+        listOperationsView.setAdapter(adapter);
+        listOperationsView.setLayoutManager(new LinearLayoutManager(getContext()));
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -82,8 +86,9 @@ public class OperationsFragment extends Fragment {
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+//            throw new RuntimeException(context.toString()
+//                    + " must implement OnFragmentInteractionListener");
+            // TODO
         }
     }
 

@@ -1,6 +1,7 @@
 package com.example.ksenia.ituproject;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
@@ -20,17 +21,7 @@ public class MyApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        initCategories();
-        // Required initialization logic here!
-    }
-
-    private void initCategories() {
-        ArrayList<Category> data = new ArrayList<>();
-        data.add(new Category("Food", ContextCompat.getColor(getApplicationContext(), R.color.colorDefaultFood)));
-        data.add(new Category("Smoking", ContextCompat.getColor(getApplicationContext(), R.color.colorDefaultSmoking)));
-        data.add(new Category("Health", ContextCompat.getColor(getApplicationContext(), R.color.colorDefaultHealth)));
-        data.add(new Category("Entertainment", ContextCompat.getColor(getApplicationContext(), R.color.colorDefaultEntertainment)));
-        MyApp.status.saveCategories(data);
+        status = new Status(getApplicationContext());
     }
 
     // Called by the system when the device configuration changes while your component is running.

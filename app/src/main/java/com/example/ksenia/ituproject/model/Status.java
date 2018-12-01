@@ -1,7 +1,9 @@
 package com.example.ksenia.ituproject.model;
 
-import com.example.ksenia.ituproject.model.Category;
-import com.example.ksenia.ituproject.model.Wallet;
+import android.content.Context;
+import android.support.v4.content.ContextCompat;
+
+import com.example.ksenia.ituproject.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,23 +27,32 @@ public class Status {
         return CategoriesData;
     }
 
-    public Status() {
+    public Status(Context context) {
+
+        // init Categories
+        CategoriesData.add(new Category("Food", ContextCompat.getColor(context, R.color.colorDefaultFood)));
+        CategoriesData.add(new Category("Smoking", ContextCompat.getColor(context, R.color.colorDefaultSmoking)));
+        CategoriesData.add(new Category("Health", ContextCompat.getColor(context, R.color.colorDefaultHealth)));
+        CategoriesData.add(new Category("Entertainment", ContextCompat.getColor(context, R.color.colorDefaultEntertainment)));
+
+        // init Wallets
         Wallet homeWallet = new Wallet("Home");
         wallets.add(homeWallet);
         wallets.add(new Wallet("Business"));
         wallets.add(new Wallet("Savings"));
 
+        // add Operations
         homeWallet.addIncomeOperation(40);
         homeWallet.addIncomeOperation(40);
         homeWallet.addIncomeOperation(40);
         homeWallet.addIncomeOperation(50);
-        homeWallet.addOutcomeOperation(150, null);
-        homeWallet.addOutcomeOperation(150, null);
-        homeWallet.addOutcomeOperation(150, null);
-        homeWallet.addOutcomeOperation(150, null);
-        homeWallet.addOutcomeOperation(150, null);
-        homeWallet.addOutcomeOperation(150, null);
-        homeWallet.addOutcomeOperation(150, null);
+        homeWallet.addOutcomeOperation(150, CategoriesData.get(0));
+        homeWallet.addOutcomeOperation(150, CategoriesData.get(0));
+        homeWallet.addOutcomeOperation(150, CategoriesData.get(0));
+        homeWallet.addOutcomeOperation(150, CategoriesData.get(1));
+        homeWallet.addOutcomeOperation(150, CategoriesData.get(2));
+        homeWallet.addOutcomeOperation(150, CategoriesData.get(3));
+        homeWallet.addOutcomeOperation(150, CategoriesData.get(2));
         homeWallet.addIncomeOperation(50);
         homeWallet.addOutcomeOperation(150, null);
         homeWallet.addOutcomeOperation(150, null);

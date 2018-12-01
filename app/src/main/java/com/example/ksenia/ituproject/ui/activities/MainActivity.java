@@ -1,7 +1,6 @@
 package com.example.ksenia.ituproject.ui.activities;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,21 +11,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.ksenia.ituproject.R;
-import com.example.ksenia.ituproject.model.Category;
-import com.example.ksenia.ituproject.model.Status;
 import com.example.ksenia.ituproject.ui.fragments.CategoriesFragment;
 import com.example.ksenia.ituproject.ui.fragments.CategoriesFragment.Listener;
 import com.example.ksenia.ituproject.ui.fragments.Statistics;
 import com.example.ksenia.ituproject.ui.fragments.WalletsFragment;
 
-import java.util.ArrayList;
-
 public class MainActivity extends BaseActivity implements Listener {
 
     private FloatingActionButton fabAddTransaction;
     boolean wasDarkMode;
-
-    public static Status status = new Status();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

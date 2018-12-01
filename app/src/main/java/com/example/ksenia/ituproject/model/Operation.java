@@ -1,7 +1,6 @@
 package com.example.ksenia.ituproject.model;
 
 
-// TODO naviazat na Category
 // TODO Currency sa zatial nepouziva
 public class Operation {
 
@@ -22,6 +21,9 @@ public class Operation {
         this.category = category;
         this.description = description;
         wallet.getOperations().add(this);
+        if (category != null) {
+            category.addOperation(this);
+        }
     }
 
     static public Operation incomeOperation(float amount, Wallet wallet, Currency currency, String description) {
