@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Status {
 
-    private final List<Currency> currencies = new ArrayList<>();
+    private final static List<Currency> currencies = new ArrayList<>();
 
     private final static List<Wallet> wallets = new ArrayList<>();
 
@@ -74,7 +74,7 @@ public class Status {
 
     public static List<Wallet> getWallets() { return wallets; }
 
-    public List<Currency> getCurrencies() {
+    public static List<Currency> getCurrencies() {
         return currencies;
     }
 }
