@@ -19,6 +19,7 @@ import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -89,45 +90,16 @@ public class StatisticsGraph1 extends Fragment {
         List<SliceValue> pieData = new ArrayList<>();
 
         // Promenna pro ukladani statistik podle kategorii.
-        Map<Category,Float> stats = new HashMap<Category, Float>();
+        Map<Category,Float> stats = MyApp.status.getCategoryToAmount();
 
         // Inicializace utraty kategorii na 0.
         ArrayList<Category> all_categories = MyApp.status.loadCategories();
-        for(Category c : all_categories)
-        {
-            stats.put(c,0.0f);
-        }
 
-        // Nacitani wallets.
-        float sum = 0;
-        List<Wallet> wallets = Status.getWallets();
-        for(Wallet w : wallets)
-        {
-            // Nacitani operaci z wallet.
-            List<Operation> lst = w.getOperations();
-            for(Operation o : lst)
-            {
-                // Kategorie vydaje.
-                Category category = o.getCategory();
-                if(category == null) {
-                    continue;
-                }
-                // Hodnota vydaje.
-                float amount = o.getAmount();
-
-                // Ukladani do statistik.
-                float was = stats.get(category);
-                stats.put(category,amount+was);
-
-                // Ukladani celkove sumy.
-                sum = sum + amount;
-            }
-        }
 
         // Vizualizace dat v grafu.
         for(Category c : all_categories)
         {
-            pieData.add(new SliceValue(stats.get(c)/sum,c.getColour()).setLabel(c.getTitle()));
+            pieData.add(new SliceValue(stats.get(c),c.getColour()).setLabel(c.getTitle()));
         }
 
         // Design grafu.
