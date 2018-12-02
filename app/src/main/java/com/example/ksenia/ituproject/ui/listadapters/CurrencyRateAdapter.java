@@ -2,6 +2,7 @@ package com.example.ksenia.ituproject.ui.listadapters;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.database.CursorIndexOutOfBoundsException;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -27,6 +28,8 @@ public class CurrencyRateAdapter extends RecyclerView.Adapter {
     EditText currencyValue;
     String strCurrencyValue;
 
+    private int selected_currency;
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -43,13 +46,14 @@ public class CurrencyRateAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int i) {
 
         // cast
         CurrencyRateViewHolder vh = (CurrencyRateViewHolder) viewHolder;
 
         // find current item
         Currency dataItem = data_currency.get(i);
+
         // display values
         vh.txtTitle.setText(dataItem.getName());
 
@@ -58,6 +62,15 @@ public class CurrencyRateAdapter extends RecyclerView.Adapter {
             @Override
             public void onClick(View v) {
                 showListCurrency(v);
+            }
+        });
+
+        // Ukladani stisknute polozky.
+        vh.root.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                selected_currency = i;
+                return true;
             }
         });
     }
@@ -88,9 +101,9 @@ public class CurrencyRateAdapter extends RecyclerView.Adapter {
 
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(v.getRootView().getContext());
         // Nastavovani titulku.
-        mBuilder.setTitle("Set currency race");
+        mBuilder.setTitle("Set currency rate");
 
-        //
+        // Textove pole pro zadavani noveho kurzu.
         currencyValue = new EditText(v.getRootView().getContext());
         mBuilder.setView(currencyValue);
 
@@ -101,6 +114,13 @@ public class CurrencyRateAdapter extends RecyclerView.Adapter {
 
                     if (! isNumeric(strCurrencyValue)) {
                         strCurrencyValue = "";
+                    }
+                    else
+                    {
+                        // Ziskana hodnota noveho kurzu.
+                        float new_rate = Float.parseFloat(strCurrencyValue);
+                        // Nastavovani noveho kurzu do statusu.
+                        MyApp.status.getCurrencies().get(selected_currency).setRate(new_rate);
                     }
 
 
