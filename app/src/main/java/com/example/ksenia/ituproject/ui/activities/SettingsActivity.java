@@ -10,6 +10,7 @@ import android.media.audiofx.Equalizer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDelegate;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -84,6 +85,28 @@ public class SettingsActivity extends BaseActivity {
                 mDialog.show();
             }
         });
+
+        // Tlacitko pro nastavovani kurzu meny.
+        Button rate_button = (Button) findViewById(R.id.rate_button);
+
+        // Akce po stisku tlacitka.
+        rate_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Dialogove okno.
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(SettingsActivity.this);
+                // Nastavovani titulku.
+
+
+                // TODO
+
+                // Zobrazeni dialogoveho okna.
+                AlertDialog mDialog = mBuilder.create();
+                mDialog.show();
+            }
+        });
+
+
     }
 
     @Override
