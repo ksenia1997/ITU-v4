@@ -105,7 +105,7 @@ public class StatisticsGraph2 extends Fragment {
             for(Operation o : w.getOperations())
             {
                 // Hodnota vydaje.
-                float amount = o.getAmount();
+                float amount = o.getAmountInMainCurrency();
 
                 if (amount > 0)
                 {
