@@ -44,4 +44,8 @@ public class Category {
     void removeOperation(Operation operation) {
         operations.remove(operation);
     }
+
+    List<Operation> getOperations() {
+        return operations;
+    }
 }

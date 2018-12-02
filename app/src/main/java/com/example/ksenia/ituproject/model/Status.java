@@ -6,7 +6,9 @@ import android.support.v4.content.ContextCompat;
 import com.example.ksenia.ituproject.R;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Status {
 
@@ -34,10 +36,10 @@ public class Status {
     public Status(Context context) {
 
         // init Currencies
-        Currency czkCurrency = new Currency("CZK");
+        Currency czkCurrency = new Currency("CZK", 1, false);
         mainCurrency = czkCurrency;
         currencies.add(czkCurrency);
-        currencies.add(new Currency("EUR"));
+        currencies.add(new Currency("EUR", 25.5, false));
 
         // init Categories
         CategoriesData.add(new Category("Food", ContextCompat.getColor(context, R.color.colorDefaultFood)));
@@ -104,5 +106,22 @@ public class Status {
 
     public String getWalletSummary(Wallet wallet) {
         return wallet.getCurrencySummary(this.currencies);
+    }
+
+    /**
+     * @return For each Category amount in the main currency.
+     */
+    public Map<Category, Float> getCategoryToAmount() {
+        Map<Category, Float> map = new LinkedHashMap<>();
+
+        for (Category category : loadCategories()) {
+            float sum = 0;
+            for (Operation operation : category.getOperations()) {
+                sum += operation.getAmountInMainCurrency();
+            }
+            map.put(category, sum);
+        }
+
+        return map;
     }
 }
