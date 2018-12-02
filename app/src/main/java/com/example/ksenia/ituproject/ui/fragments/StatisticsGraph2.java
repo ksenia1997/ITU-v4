@@ -105,7 +105,7 @@ public class StatisticsGraph2 extends Fragment {
             for(Operation o : w.getOperations())
             {
                 // Hodnota vydaje.
-                float amount = o.getAmount();
+                float amount = o.getAmountInMainCurrency();
 
                 if (amount > 0)
                 {
@@ -131,7 +131,7 @@ public class StatisticsGraph2 extends Fragment {
 
         // Vizualizace sloupce s prijmy.
         BarGraphSeries<DataPoint> in = new BarGraphSeries<>(new DataPoint[] {
-                new DataPoint(2, abs(incomes)),
+                new DataPoint(2, abs(outcomes)),
 
         });
         graph.addSeries(in);
@@ -142,7 +142,7 @@ public class StatisticsGraph2 extends Fragment {
 
         // Vizualizace sloupce s vydaji.
         BarGraphSeries<DataPoint> out = new BarGraphSeries<>(new DataPoint[] {
-                new DataPoint(1, abs(outcomes)),
+                new DataPoint(1, abs(incomes)),
         });
         graph.addSeries(out);
         out.setColor(Color.BLUE);

@@ -76,7 +76,7 @@ public class SettingsActivity extends BaseActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         // Doplnit reakci na hodnotu.
-                        Status.setMainCurrency(Status.getCurrencies().get(i));
+                        MyApp.status.setMainCurrency(Status.getCurrencies().get(i));
                         dialogInterface.dismiss();
                     }
                 });
