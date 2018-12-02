@@ -113,25 +113,6 @@ public class SettingsActivity extends BaseActivity {
         startActivity(new Intent(this, SettingsActivity.class));
     }
 
-   /* public void showListCurrency () {
-
-        AlertDialog.Builder mBuilder = new AlertDialog.Builder(SettingsActivity.this);
-        // Nastavovani titulku.
-        mBuilder.setTitle("Currency list");
-
-
-        //negative button
-        mBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        // Zobrazeni dialogoveho okna.
-        AlertDialog mDialog = mBuilder.create();
-        mDialog.show();
-    }
-    */
     public void setCureencies() {
 
     }

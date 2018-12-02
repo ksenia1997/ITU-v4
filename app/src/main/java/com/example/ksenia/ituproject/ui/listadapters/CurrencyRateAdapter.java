@@ -1,10 +1,13 @@
 package com.example.ksenia.ituproject.ui.listadapters;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.ksenia.ituproject.MyApp;
@@ -12,6 +15,7 @@ import com.example.ksenia.ituproject.R;
 import com.example.ksenia.ituproject.model.Category;
 import com.example.ksenia.ituproject.model.Currency;
 import com.example.ksenia.ituproject.model.Status;
+import com.example.ksenia.ituproject.ui.activities.CurrencyActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +24,8 @@ import java.util.List;
 public class CurrencyRateAdapter extends RecyclerView.Adapter {
 
     private ArrayList<Currency> data_currency = new ArrayList();
+    EditText currencyValue;
+    String strCurrencyValue;
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -45,6 +51,14 @@ public class CurrencyRateAdapter extends RecyclerView.Adapter {
         Currency dataItem = data_currency.get(i);
         // display values
         vh.txtTitle.setText(dataItem.getName());
+
+        vh.root.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                showListCurrency(v);
+            }
+        });
     }
 
     @Override
@@ -68,4 +82,32 @@ public class CurrencyRateAdapter extends RecyclerView.Adapter {
             txtTitle = itemView.findViewById(R.id.item_row);
         }
     }
+
+       public void showListCurrency (View v) {
+
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(v.getRootView().getContext());
+        // Nastavovani titulku.
+        mBuilder.setTitle("Set currency race");
+        currencyValue = new EditText(v.getRootView().getContext());
+        mBuilder.setView(currencyValue);
+
+        mBuilder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+               @Override
+               public void onClick(DialogInterface dialog, int which) {
+                    strCurrencyValue = currencyValue.getText().toString();
+
+               }
+        });
+        //negative button
+        mBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        // Zobrazeni dialogoveho okna.
+        AlertDialog mDialog = mBuilder.create();
+        mDialog.show();
+    }
+
 }
