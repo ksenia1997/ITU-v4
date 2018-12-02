@@ -26,6 +26,7 @@ public class CurrencyRateAdapter extends RecyclerView.Adapter {
     private ArrayList<Currency> data_currency = new ArrayList();
     EditText currencyValue;
     String strCurrencyValue;
+  
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -88,6 +89,8 @@ public class CurrencyRateAdapter extends RecyclerView.Adapter {
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(v.getRootView().getContext());
         // Nastavovani titulku.
         mBuilder.setTitle("Set currency race");
+
+        //
         currencyValue = new EditText(v.getRootView().getContext());
         mBuilder.setView(currencyValue);
 
@@ -95,6 +98,11 @@ public class CurrencyRateAdapter extends RecyclerView.Adapter {
                @Override
                public void onClick(DialogInterface dialog, int which) {
                     strCurrencyValue = currencyValue.getText().toString();
+
+                    if (! isNumeric(strCurrencyValue)) {
+                        strCurrencyValue = "";
+                    }
+
 
                }
         });
@@ -108,6 +116,11 @@ public class CurrencyRateAdapter extends RecyclerView.Adapter {
         // Zobrazeni dialogoveho okna.
         AlertDialog mDialog = mBuilder.create();
         mDialog.show();
+    }
+
+    public static boolean isNumeric(String str)
+    {
+        return str.matches("-?\\d+(\\.\\d+)?");  //match a number with optional '-' and decimal.
     }
 
 }
