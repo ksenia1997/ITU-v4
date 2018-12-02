@@ -121,8 +121,6 @@ public class    CategoriesFragment extends Fragment {
         builder.setTitle("Create new category");
 
         create_category = new EditText(getContext());
-        int padding = getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin);
-        create_category.setPadding(padding, 0, padding, 0);
         builder.setView(create_category);
         //set positive button
         builder.setPositiveButton("Create", new DialogInterface.OnClickListener() {
