@@ -88,8 +88,15 @@ public class Status {
         return mainCurrency;
     }
 
-    public static void setMainCurrency(Currency currency) {
-        mainCurrency = currency;
+    public static void setMainCurrency(Currency mainCurrency) {
+
+        for (Currency currency : getCurrencies()) {
+            if (currency != mainCurrency) {
+                currency.mainCurrencyChanged(mainCurrency);
+            }
+        }
+        mainCurrency.setAsMainCurrency();
+        Status.mainCurrency = mainCurrency;
     }
 
     /**

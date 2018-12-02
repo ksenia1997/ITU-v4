@@ -41,4 +41,26 @@ public class Currency {
     public void setDirection(boolean direction) {
         this.direction = direction;
     }
+
+    private float getRateInFalseDirection() {
+        return direction ? 1 / rate : rate;
+    }
+
+    void mainCurrencyChanged(Currency mainCurrency) {
+        // for example:
+        // last main currency = CZK
+        // this = USD
+        // main currency = EUR
+        if (this.getRateInFalseDirection() < mainCurrency.getRateInFalseDirection()) {
+            rate = mainCurrency.getRateInFalseDirection() / this.getRateInFalseDirection();
+            direction = true;
+        } else {
+            rate = this.getRateInFalseDirection() / mainCurrency.getRateInFalseDirection();
+            direction = false;
+        }
+    }
+
+    void setAsMainCurrency() {
+        rate = 1;
+    }
 }

@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.example.ksenia.ituproject.MyApp;
 import com.example.ksenia.ituproject.R;
@@ -94,15 +95,7 @@ public class SettingsActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 // Dialogove okno.
-                AlertDialog.Builder mBuilder = new AlertDialog.Builder(SettingsActivity.this);
-                // Nastavovani titulku.
-
-
-                // TODO
-
-                // Zobrazeni dialogoveho okna.
-                AlertDialog mDialog = mBuilder.create();
-                mDialog.show();
+                startActivity(new Intent(SettingsActivity.this, CurrencyActivity.class));
             }
         });
 
@@ -118,5 +111,9 @@ public class SettingsActivity extends BaseActivity {
     public void restart() {
         finish();
         startActivity(new Intent(this, SettingsActivity.class));
+    }
+
+    public void setCureencies() {
+
     }
 }

@@ -1,4 +1,4 @@
-    <resources>
+<resources>
     <string name="app_name">MoneyManagement</string>
     <string name="title_home">Wallets</string>
     <string name="statistics">Statistics</string>
