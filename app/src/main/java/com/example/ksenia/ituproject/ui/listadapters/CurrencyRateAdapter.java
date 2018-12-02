@@ -26,7 +26,7 @@ public class CurrencyRateAdapter extends RecyclerView.Adapter {
     private ArrayList<Currency> data_currency = new ArrayList();
     EditText currencyValue;
     String strCurrencyValue;
-  
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
