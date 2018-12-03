@@ -99,7 +99,10 @@ public class StatisticsGraph1 extends Fragment {
         // Vizualizace dat v grafu.
         for(Category c : all_categories)
         {
-            pieData.add(new SliceValue(stats.get(c),c.getColour()).setLabel(c.getTitle()));
+            float value = stats.get(c);
+            if (value != 0) {
+                pieData.add(new SliceValue(stats.get(c),c.getColour()).setLabel(c.getTitle()));
+            }
         }
 
         // Design grafu.

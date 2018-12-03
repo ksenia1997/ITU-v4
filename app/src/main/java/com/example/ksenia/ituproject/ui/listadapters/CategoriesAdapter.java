@@ -76,9 +76,9 @@ public class CategoriesAdapter extends RecyclerView.Adapter {
     }
 
     public void remove(int position) {
-        data.remove(position);
+        notifyItemRangeChanged(position + 1, getItemCount() - 1);
         notifyItemRemoved(position);
-        notifyItemRangeChanged(position, data.size()-1);
+        data.remove(position);
         MyApp.status.saveCategories(data);
     }
 
